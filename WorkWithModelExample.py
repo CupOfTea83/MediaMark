@@ -5,5 +5,7 @@ score = model.GetScore(name = "",
                        media_type = "",
                        episodes = 0,
                        date = 0,
-                       description = "")
+                       description = "",
+                       rating = "",
+                       studio = "")
                        
