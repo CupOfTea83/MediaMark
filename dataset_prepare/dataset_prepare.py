@@ -4,6 +4,7 @@ from sklearn.feature_extraction import DictVectorizer
 import scipy.sparse as sps
 import joblib
 import itertools
+import pickle
 
 dataset = pandas.read_csv('./anime.csv')[["MAL_ID", "Name", "Score", "Genres", "Type", "Episodes", "Aired", "Studios", "Rating"]]
 dataset_synopsis = pandas.read_csv('./anime_with_synopsis.csv')[["MAL_ID", "sypnopsis"]]
@@ -28,7 +29,9 @@ joblib.dump(dict_vectorizer, 'dict_vectorizer.joblib', compress=9)
 all_vectors = sps.hstack([name_vectors, description_vectors, dict_vectors]) 
 
 output_df = pandas.DataFrame(data=sps.csr_matrix.todense(all_vectors))
-output_df.to_csv('prepared_data.csv', index=False)
+with open("./prepared_data.dat", "wb") as file:
+    pickle.dump(output_df, file)
+#output_df.to_csv('prepared_data.csv', index=False)
 #for (name, description, other) in zip(name_vectors, 
 #                                      description_vectors, 
 #                                      dict_vectors):
