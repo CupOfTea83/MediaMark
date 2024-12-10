@@ -1,16 +1,16 @@
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPRegressor
-import pickle
+import numpy as np
 import pandas as pd
+import joblib
 
-PATH = "C:\\Users\\Никита\\Desktop\\data\\prepared_data.csv"
+PATH_X = "C:\\Users\\Никита\\Desktop\\data\\vectors_np.joblib"
+PATH_Y = "C:\\Users\\Никита\\Desktop\\data\\scores_np.joblib"
+PATH_MODEL = ".\\model.joblib"
 
 print("Loading data - ", end="")
-df = pd.read_csv(PATH, header = None)
-print("Done")
-y = df[0]
-print("Done")
-x = df.drop([0], axis=1).to_numpy()
+x = joblib.load(PATH_X)
+y = joblib.load(PATH_Y)
 print("Done")
 
 print("Preparing train/test data - ", end="")
@@ -31,5 +31,4 @@ print("Score -", score)
 print("Save? [y/n]")
 command = input()
 if command == "y":
-    with open("./model.dat", "wb") as file:
-        pickle.dump(model, file)
+    joblib.dump(model, PATH_MODEL)
