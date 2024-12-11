@@ -19,12 +19,18 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, random_state = 1)
 print("Done")
 
 print("Creating model - ", end="")
-model = MLPRegressor(random_state = 1, max_iter = 10000)
+model = MLPRegressor(random_state = 1,
+                     hidden_layer_sizes = (80, 40, 20),
+                     activation = "logistic",
+                     solver = "sgd",
+                     learning_rate = "adaptive",
+                     verbose = True,
+                     max_iter = 1000)
 print("Done")
 
-print("Learning model - ", end="")
+print("Learning model: Processing")
 model.fit(x_train, y_train)
-print("Done")
+print("Learning model: Done")
 
 score = sqrt(mean_squared_error(model.predict(x_test), y_test))
 print("Score -", score)
@@ -32,4 +38,4 @@ print("Score -", score)
 print("Save? [y/n]")
 command = input()
 if command == "y":
-    joblib.dump(model, PATH_MODEL)
+    joblib.dump(model, PATH_MODEL, compress=9)
