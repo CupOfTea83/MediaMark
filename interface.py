@@ -14,17 +14,28 @@ class Example(QMainWindow, test2.Ui_MainWindow):
                         ,'ova','ova','ova','ova','ova','ova','ova','ova']
         ListOfStudios = ['Tridgger','UfoTable','Mappa']
         ListOfAgeRatings = ['R','14+','0+']
-        self.Type_Combobox.addItems(ListOfTypes)
-        self.Studio_Combobox.addItems(ListOfStudios)
-        self.AgeRating_Combobox.addItems(ListOfAgeRatings)
+        self.Type_Combobox.addItems(ListOfTypes)#коллекция для типа
+        self.AgeRating_Combobox.addItems(ListOfAgeRatings)#коллекция для возраста
+        
+        
+        
         layout = QVBoxLayout()
         for i in range(0,len(ListOfGenres)):
             label = QCheckBox(ListOfGenres[i], self)
             layout.addWidget(label)
         widget = QWidget()
         widget.setLayout(layout)
-        self.scrollArea.setWidget(widget)
-        self.scrollArea.show()
+        self.GenreArea.setWidget(widget)
+        self.GenreArea.show()
+
+        layout = QVBoxLayout()
+        for i in range(0,len(ListOfStudios)):
+            label = QCheckBox(ListOfGenres[i], self)
+            layout.addWidget(label)
+        widget = QWidget()
+        widget.setLayout(layout)
+        self.StudiosArea.setWidget(widget)
+        self.StudiosArea.show()
 
 
     def generate_pins(self, size=6, chars=string.digits):
