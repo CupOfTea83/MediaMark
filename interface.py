@@ -26,26 +26,37 @@ class Example(QMainWindow, test2.Ui_MainWindow):
         self.Type_Combobox.addItems(ListOfTypes)#коллекция для типа
         self.AgeRating_Combobox.addItems(ListOfAgeRatings)#коллекция для возраста
                
-        layout = QVBoxLayout()
+        HelperLayout = QVBoxLayout()
         for i in range(0,len(ListOfGenres)):
-            label = QCheckBox(ListOfGenres[i], self)
-            layout.addWidget(label)
-        widget = QWidget()
-        widget.setLayout(layout)
-        self.GenreArea.setWidget(widget)
+            GenreLabel = QCheckBox(ListOfGenres[i], self)
+            HelperLayout.addWidget(GenreLabel)
+        HelperWidget = QWidget()
+        HelperWidget.setLayout(HelperLayout)
+        self.GenreArea.setWidget(HelperWidget)
         self.GenreArea.show()
 
-        layout = QVBoxLayout()
+        HelperLayout = QVBoxLayout()
         for i in range(0,len(ListOfStudios)):
-            label = QCheckBox(ListOfStudios[i], self)
-            layout.addWidget(label)
-        widget = QWidget()
-        widget.setLayout(layout)
-        self.StudiosArea.setWidget(widget)
+            StudioLabel = QCheckBox(ListOfStudios[i], self)
+            HelperLayout.addWidget(StudioLabel)
+        HelperWidget = QWidget()
+        HelperWidget.setLayout(HelperLayout)
+        self.StudiosArea.setWidget(HelperWidget)
         self.StudiosArea.show()
-        
-    def buttonClicked(self):
-        self.textEdit.append(self.generate_pins(10))
+
+        self.Estimation_button.clicked.connect(self.Estimateclicked)# событие нажатия на кнопку
+    def Estimateclicked(self):
+        self.Estimation_label.setText('3.3')
+        ListOfSelectedGenres = []
+        ListOfSelectedStudios = []
+        for i in range(0,self.GenreArea.widget().layout().count()):
+            if (self.GenreArea.widget().layout().itemAt(i).widget().isChecked()):
+                ListOfSelectedGenres.append(self.GenreArea.widget().layout().itemAt(i).widget().text())
+        for i in range(0,self.StudiosArea.widget().layout().count()):
+            if (self.StudiosArea.widget().layout().itemAt(i).widget().isChecked()):
+                ListOfSelectedStudios .append(self.StudiosArea.widget().layout().itemAt(i).widget().text())
+        print(ListOfSelectedGenres)
+        print(ListOfSelectedStudios )
 stylesheet = """
     QMainWindow {
         background-image: url("fon1.jpg");
@@ -55,7 +66,7 @@ stylesheet = """
     QLabel {
         font: 20pt Segoe UI Semibold;
     }
-    QLabel#label {
+    QLabel#Estimation_label {
         font: 20pt Segoe UI Semibold;
         background-color: #ddfff7;
     }
