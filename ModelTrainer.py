@@ -22,10 +22,8 @@ print("Creating model - ", end="")
 model = MLPRegressor(random_state = 1,
                      hidden_layer_sizes = (80, 40, 20),
                      activation = "logistic",
-                     solver = "sgd",
-                     learning_rate = "adaptive",
                      verbose = True,
-                     max_iter = 1000)
+                     max_iter = 10)
 print("Done")
 
 print("Learning model: Processing")
