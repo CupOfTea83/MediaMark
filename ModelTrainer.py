@@ -5,8 +5,8 @@ from math import sqrt
 import numpy as np
 import joblib
 
-PATH_X = "C:\\Users\\Никита\\Desktop\\data\\vectors_np.joblib"
-PATH_Y = "C:\\Users\\Никита\\Desktop\\data\\scores_np.joblib"
+PATH_X = ".\\vectors_np.joblib"
+PATH_Y = ".\\scores_np.joblib"
 PATH_MODEL = ".\\model.joblib"
 
 print("Loading data - ", end="")
@@ -20,10 +20,11 @@ print("Done")
 
 print("Creating model - ", end="")
 model = MLPRegressor(random_state = 1,
-                     hidden_layer_sizes = (80, 40, 20),
-                     activation = "logistic",
+                     hidden_layer_sizes = (240, 120, 60),
+                     activation = "tanh",
+                     solver = "adam",
                      verbose = True,
-                     max_iter = 10)
+                     max_iter = 100)
 print("Done")
 
 print("Learning model: Processing")
