@@ -5,11 +5,12 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 import json
-import test2
+import MainWindow
 from ImportExport import * 
 from Model import Model
-class Example(QMainWindow, test2.Ui_MainWindow):
-    
+
+
+class Application(QMainWindow, MainWindow.Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -70,9 +71,7 @@ class Example(QMainWindow, test2.Ui_MainWindow):
                                )
         self.Estimation_label.setText(str(round(score[0],2)))
         self.FullEstimation_label.setText(str(round(score[0],6)))
-        print(score[0])
     def SaveClicked(self):
-        #print("work")
         res = QFileDialog.getSaveFileName()
         ListOfSelectedGenres = []
         ListOfSelectedStudios = []
@@ -96,10 +95,8 @@ class Example(QMainWindow, test2.Ui_MainWindow):
 
                )
     def SelectFile(self):
-        #print("work")
         res = QFileDialog.getOpenFileName()
         per = Import(path=res[0])
-        print(per)
         if per != False:
             self.Description_textEdit.setPlainText(per["description"])
             self.Name_textEdit.setPlainText(per["name"])
@@ -126,6 +123,6 @@ class Example(QMainWindow, test2.Ui_MainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    form = Example()
+    form = Application()
     form.show()
     app.exec()
