@@ -123,7 +123,7 @@ class Application(QMainWindow, mainwindow.Ui_MainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    with open('stylesheet.css', 'r') as f:
+    with open('stylesheet.qss', 'r') as f:
         style = f.read()
         app.setStyleSheet(style)
     form = Application()
