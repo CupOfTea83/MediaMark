@@ -1,0 +1,46 @@
+QMainWindow {
+        background-color: #F0F0F0FF;
+        background-repeat: no-repeat; 
+        background-position: center;
+    }
+    QLabel {
+        font: 10pt Segoe UI Semibold;
+    }
+    QLabel#estimation_label {
+        font: 20pt Segoe UI Semibold;
+        background-color: #ddfff7;
+        border: 2px solid black;
+    }
+QLabel#media_mark_main_label {
+        font: 15pt Segoe UI Semibold;
+    }
+QLabel#FullEstimation_label {
+        font: 20pt Segoe UI Semibold;
+        background-color: #ddffd9;
+        border: 2px solid black;
+    }
+    QPushButton {
+        font: 15pt Segoe UI Semibold;
+        border: 1px solid black;
+    }
+    QComboBox {
+        font: 10pt Segoe UI Semibold;
+    }
+    QLineEdit {
+        font: 10pt Segoe UI Semibold;
+    }
+    QDateEdit {
+        font: 10pt Segoe UI Semibold;
+    }
+    QCheckBox 
+        font: 10pt Segoe UI Semibold;
+    }
+    QTextEdit
+{
+    font: 10pt Segoe UI Semibold;
+    border: 1px solid black;
+}
+QScrollArea
+{
+    border: 1px solid black;
+}
