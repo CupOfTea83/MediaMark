@@ -9,7 +9,7 @@ class Model():
     def __init__(self):
         self.model = joblib.load(self._MODEL_PATH)
 
-    def GetScore(self, **kwargs):
+    def getscore(self, **kwargs):
         parameters = np.asarray(vectorize_parameters(kwargs["name"],
                          kwargs["description"],
                          kwargs["genres"],

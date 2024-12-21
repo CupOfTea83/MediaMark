@@ -4,7 +4,7 @@ import scipy.sparse as sps
 import numpy as np
 import joblib
 
-#[["Name", "Genres", "Type", "Episodes", "Year", "Studios", "Rating"]]
+
 def vectorize_parameters(name,
                          description,
                          genres,
@@ -33,19 +33,3 @@ def vectorize_parameters(name,
     all_vectors = sps.hstack([name_vectors, description_vectors, dict_vectors]).todense()
 
     return all_vectors
-
-def main():
-    vectors = vectorize_parameters("I reincarnate as a rolling  stone in another world.",
-                                   "This is a story about a guy who reincarnated in another world as a rolling stone.",
-                                   ['Comedy', 'Magic', 'Fnatasy'],
-                                   'TV',
-                                   12,
-                                   2025,
-                                   ['ufotable'],
-                                   'R - 17+ (violence & profanity)')
-    print(type(vectors))
-    print(vectors.shape)
-
-
-if (__name__ == '__main__'):
-    main()

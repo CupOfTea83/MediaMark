@@ -4,10 +4,23 @@ from sklearn.metrics import mean_squared_error
 from math import sqrt
 import numpy as np
 import joblib
+import json
 
 PATH_X = ".\\vectors_np.joblib"
 PATH_Y = ".\\scores_np.joblib"
 PATH_MODEL = ".\\model.joblib"
+PATH_EXPERIMENTS = ".\\experiments\\"
+
+name = "model1"
+random_state_model = 1
+hidden_layer_sizes = (240, 120, 60)
+activation = "tanh"
+solver = "adam"
+verbose = True
+max_iter = 100
+
+test_size = 0.25
+random_state_test = 1
 
 print("Loading data - ", end="")
 x = np.asarray(joblib.load(PATH_X))
@@ -15,16 +28,16 @@ y = np.asarray(joblib.load(PATH_Y))
 print("Done")
 
 print("Preparing train/test data - ", end="")
-x_train, x_test, y_train, y_test = train_test_split(x, y, random_state = 1)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=random_state_test)
 print("Done")
 
 print("Creating model - ", end="")
-model = MLPRegressor(random_state = 1,
-                     hidden_layer_sizes = (240, 120, 60),
-                     activation = "tanh",
-                     solver = "adam",
-                     verbose = True,
-                     max_iter = 100)
+model = MLPRegressor(random_state=random_state_model,
+                     hidden_layer_sizes=hidden_layer_sizes,
+                     activation=activation,
+                     solver=solver,
+                     verbose=verbose,
+                     max_iter=max_iter)
 print("Done")
 
 print("Learning model: Processing")
@@ -33,6 +46,20 @@ print("Learning model: Done")
 
 score = sqrt(mean_squared_error(model.predict(x_test), y_test))
 print("Score -", score)
+
+file_name = PATH_EXPERIMENTS + name + ".json"
+with open(file_name, 'w') as file:
+    data = {}
+    data["model_settings"] = {"random_state_model": random_state_model,
+                              "hidden_layer_sizes": hidden_layer_sizes,
+                              "activation": activation,
+                              "solver": solver,
+                              "verbose": verbose,
+                              "max_iter": max_iter}
+    data["test_settings"] = {"random_state_test": random_state_test,
+                             "test_size": test_size}
+    data["result"] = score
+    json.dump(data, file)
 
 print("Save? [y/n]")
 command = input()
