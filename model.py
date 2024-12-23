@@ -4,10 +4,10 @@ import numpy as np
 from vectorization_module.vectorization import vectorize_parameters
 
 class Model():
-    _MODEL_PATH = "./model.joblib"
+    __MODEL_PATH = "./model.joblib"
     
     def __init__(self):
-        self.model = joblib.load(self._MODEL_PATH)
+        self.__model = joblib.load(self.__MODEL_PATH)
 
     def getscore(self, **kwargs):
         parameters = np.asarray(vectorize_parameters(kwargs["name"],
@@ -19,6 +19,6 @@ class Model():
                          kwargs["studios"],
                          kwargs["rating"]))
 
-        score = self.model.predict(parameters)
+        score = self.__model.predict(parameters)
 
         return score
