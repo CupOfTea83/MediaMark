@@ -11,13 +11,14 @@ PATH_Y = ".\\scores_np.joblib"
 PATH_MODEL = ".\\model.joblib"
 PATH_EXPERIMENTS = ".\\experiments\\"
 
-name = "model1"
+name = "model6"
 random_state_model = 1
-hidden_layer_sizes = (240, 120, 60)
+hidden_layer_sizes = (120, 60, 30)
 activation = "tanh"
-solver = "adam"
+solver = "sgd"
 verbose = True
 max_iter = 100
+nesterovs_momentum = False
 
 test_size = 0.25
 random_state_test = 1
@@ -37,7 +38,8 @@ model = MLPRegressor(random_state=random_state_model,
                      activation=activation,
                      solver=solver,
                      verbose=verbose,
-                     max_iter=max_iter)
+                     max_iter=max_iter,
+                     nesterovs_momentum=nesterovs_momentum)
 print("Done")
 
 print("Learning model: Processing")
@@ -55,13 +57,11 @@ with open(file_name, 'w') as file:
                               "activation": activation,
                               "solver": solver,
                               "verbose": verbose,
-                              "max_iter": max_iter}
+                              "max_iter": max_iter,
+                              "nesterovs_momentum":nesterovs_momentum}
     data["test_settings"] = {"random_state_test": random_state_test,
                              "test_size": test_size}
     data["result"] = score
     json.dump(data, file)
 
-print("Save? [y/n]")
-command = input()
-if command == "y":
-    joblib.dump(model, PATH_MODEL, compress=9)
+joblib.dump(model, PATH_MODEL, compress=9)

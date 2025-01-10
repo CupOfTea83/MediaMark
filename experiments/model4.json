@@ -1,0 +1,1 @@
+{"model_settings": {"random_state_model": 1, "hidden_layer_sizes": [120, 60, 30], "activation": "tanh", "solver": "sgd", "verbose": true, "max_iter": 100}, "test_settings": {"random_state_test": 1, "test_size": 0.25}, "result": 0.8991518331499768}
